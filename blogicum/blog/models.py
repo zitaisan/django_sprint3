@@ -6,7 +6,6 @@ User = get_user_model()
 
 
 class Category(models.Model):
-    """Тематическая категория"""
     title = models.CharField(
         max_length=256,
         blank=True,
@@ -46,7 +45,6 @@ class Category(models.Model):
 
 
 class Location(models.Model):
-    """Географическая метка"""
     name = models.CharField(
         max_length=256,
         blank=True,
@@ -74,7 +72,6 @@ class Location(models.Model):
 
 
 class Post(models.Model):
-    """Публикация"""
     title = models.CharField(
         max_length=256,
         blank=True,
