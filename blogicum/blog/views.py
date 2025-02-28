@@ -1,8 +1,5 @@
-from typing import Union
-
-from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.http import Http404
-from .models import Post, Category, Location
+from django.shortcuts import get_object_or_404, render
+from .models import Post, Category
 from django.utils import timezone
 
 
@@ -36,7 +33,10 @@ def post_detail(request, post_id):
 def category_posts(request, category_slug):
     template_name = 'blog/category.html'
 
-    category = get_object_or_404(Category, slug=category_slug, is_published=True)
+    category = get_object_or_404(
+        Category,
+        slug=category_slug,
+        is_published=True)
 
     post_list = Post.objects.filter(
             category=category,
@@ -44,7 +44,8 @@ def category_posts(request, category_slug):
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')
 
-
-    context = {'category': category,
-               'post_list': post_list}
+    context = {
+        'category': category,
+        'post_list': post_list
+    }
     return render(request, template_name, context)

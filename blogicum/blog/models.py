@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 User = get_user_model()
+
 
 class Category(models.Model):
     """Тематическая категория"""
@@ -39,6 +41,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
 class Location(models.Model):
     """Географическая метка"""
     name = models.CharField(
@@ -64,6 +67,8 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+
 class Post(models.Model):
     """Публикация"""
     title = models.CharField(
@@ -82,7 +87,7 @@ class Post(models.Model):
     )
     author = models.ForeignKey(
         User,
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
         verbose_name='Автор публикации'
     )
     location = models.ForeignKey(
@@ -114,5 +119,6 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
+
     def __str__(self):
         return self.title
